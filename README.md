@@ -103,15 +103,21 @@ This code is also in [`demos/hello-world.js`](demos/hello-world.js), if you want
   - [send](#send)
     - [Parameters](#parameters-4)
     - [Examples](#examples-6)
-  - [delete](#delete)
+  - [attach](#attach)
     - [Parameters](#parameters-5)
     - [Examples](#examples-7)
-  - [watchChannelForNewMessages](#watchchannelfornewmessages)
+  - [download](#download)
     - [Parameters](#parameters-6)
     - [Examples](#examples-8)
-  - [watchAllChannelsForNewMessages](#watchallchannelsfornewmessages)
+  - [delete](#delete)
     - [Parameters](#parameters-7)
     - [Examples](#examples-9)
+  - [watchChannelForNewMessages](#watchchannelfornewmessages)
+    - [Parameters](#parameters-8)
+    - [Examples](#examples-10)
+  - [watchAllChannelsForNewMessages](#watchallchannelsfornewmessages)
+    - [Parameters](#parameters-9)
+    - [Examples](#examples-11)
 - [Chat Types](#chat-types)
   - [ChatChannel](#chatchannel)
     - [Properties](#properties-2)
@@ -129,35 +135,39 @@ This code is also in [`demos/hello-world.js`](demos/hello-world.js), if you want
     - [Properties](#properties-8)
   - [OnMessage](#onmessage)
   - [OnError](#onerror)
+- [ChatAttachOptions](#chatattachoptions)
+  - [Properties](#properties-9)
+- [ChatDownloadOptions](#chatdownloadoptions)
+  - [Properties](#properties-10)
 - [Wallet](#wallet)
   - [balances](#balances)
-    - [Examples](#examples-10)
-  - [history](#history)
-    - [Parameters](#parameters-8)
-    - [Examples](#examples-11)
-  - [details](#details)
-    - [Parameters](#parameters-9)
     - [Examples](#examples-12)
-  - [lookup](#lookup)
+  - [history](#history)
     - [Parameters](#parameters-10)
     - [Examples](#examples-13)
-  - [send](#send-1)
+  - [details](#details)
     - [Parameters](#parameters-11)
     - [Examples](#examples-14)
-  - [cancel](#cancel)
+  - [lookup](#lookup)
     - [Parameters](#parameters-12)
     - [Examples](#examples-15)
+  - [send](#send-1)
+    - [Parameters](#parameters-13)
+    - [Examples](#examples-16)
+  - [cancel](#cancel)
+    - [Parameters](#parameters-14)
+    - [Examples](#examples-17)
 - [PaymentStatus](#paymentstatus)
 - [Asset](#asset)
-  - [Properties](#properties-9)
-- [ExchangeRate](#exchangerate)
-  - [Properties](#properties-10)
-- [Balance](#balance)
   - [Properties](#properties-11)
-- [Account](#account)
+- [ExchangeRate](#exchangerate)
   - [Properties](#properties-12)
-- [Transaction](#transaction)
+- [Balance](#balance)
   - [Properties](#properties-13)
+- [Account](#account)
+  - [Properties](#properties-14)
+- [Transaction](#transaction)
+  - [Properties](#properties-15)
 
 ### Bot
 
@@ -306,6 +316,39 @@ bot.chat.send(channel, message).then(() => console.log('message sent!'))
 ```
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;void>**
+
+#### attach
+
+Send a file to a channel.
+
+##### Parameters
+
+- `channel` **[ChatChannel](#chatchannel)** The chat channel to send the message in.
+- `filename` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The absolute path of the file to send.
+- `options` **[ChatAttachOptions](#chatattachoptions)** An object of options that can be passed to the method.
+
+##### Examples
+
+```javascript
+bot.chat.attach(channel, '/Users/nathan/my_picture.png').then(() => console.log('Sent a picture!'))
+```
+
+#### download
+
+Download a file send via Keybase chat.
+
+##### Parameters
+
+- `channel` **[ChatChannel](#chatchannel)** The chat channel that the desired attacment to download is in.
+- `messageId` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** The message id of the attached file.
+- `output` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The absolute path of where the file should be downloaded to.
+- `options` **[ChatDownloadOptions](#chatdownloadoptions)** An object of options that can be passed to the method
+
+##### Examples
+
+```javascript
+bot.chat.download(channel, 325, '/Users/nathan/Downloads/file.png')
+```
 
 #### delete
 
@@ -491,6 +534,30 @@ Type: function (message: MessageSummary): (void | [Promise](https://developer.mo
 A function to call when an error occurs.
 
 Type: function (error: [Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)): (void | [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;void>)
+
+### ChatAttachOptions
+
+Options for the `attach` method of the chat module.
+
+Type: {conversationId: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?, title: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?, preview: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?}
+
+#### Properties
+
+- `conversationId` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**
+- `title` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**
+- `preview` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**
+
+### ChatDownloadOptions
+
+Options for the `download` method of the chat module.
+
+Type: {conversationId: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?, preview: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?, noStream: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?}
+
+#### Properties
+
+- `conversationId` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**
+- `preview` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?**
+- `noStream` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?**
 
 ### Wallet
 
