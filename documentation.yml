@@ -24,3 +24,14 @@ toc:
       - ChatDeleteOptions
       - OnMessage
       - OnError
+  - Wallet
+  - name: Wallet Types
+    description: |
+      A collection of types used by the Wallet module.
+    children:
+      - Asset
+      - ExchangeRate
+      - Balance
+      - Account
+      - Transaction
+      - PaymentStatus

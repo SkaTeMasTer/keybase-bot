@@ -147,17 +147,18 @@ This code is also in [`demos/hello-world.js`](demos/hello-world.js), if you want
   - [cancel](#cancel)
     - [Parameters](#parameters-12)
     - [Examples](#examples-15)
-- [PaymentStatus](#paymentstatus)
-- [Asset](#asset)
-  - [Properties](#properties-9)
-- [ExchangeRate](#exchangerate)
-  - [Properties](#properties-10)
-- [Balance](#balance)
-  - [Properties](#properties-11)
-- [Account](#account)
-  - [Properties](#properties-12)
-- [Transaction](#transaction)
-  - [Properties](#properties-13)
+- [Wallet Types](#wallet-types)
+  - [Asset](#asset)
+    - [Properties](#properties-9)
+  - [ExchangeRate](#exchangerate)
+    - [Properties](#properties-10)
+  - [Balance](#balance)
+    - [Properties](#properties-11)
+  - [Account](#account)
+    - [Properties](#properties-12)
+  - [Transaction](#transaction)
+    - [Properties](#properties-13)
+  - [PaymentStatus](#paymentstatus)
 
 ### Bot
 
@@ -606,19 +607,17 @@ bot.wallet
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;void>**
 
-### PaymentStatus
+### Wallet Types
 
-The status of a payment.
+A collection of types used by the Wallet module.
 
-Type: (`"none"` \| `"pending"` \| `"claimable"` \| `"completed"` \| `"error"` \| `"unknown"` \| `"canceled"`)
-
-### Asset
+#### Asset
 
 An asset.
 
 Type: {type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), code: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), issuer: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), verifiedDomain: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), issuerName: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}
 
-#### Properties
+##### Properties
 
 - `type` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 - `code` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
@@ -626,36 +625,36 @@ Type: {type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Referenc
 - `verifiedDomain` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 - `issuerName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 
-### ExchangeRate
+#### ExchangeRate
 
 An exchange rate, which specifies a currency and the rate of exchange between an asset and that currency.
 
 Type: {currency: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), rate: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}
 
-#### Properties
+##### Properties
 
 - `currency` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 - `rate` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 
-### Balance
+#### Balance
 
 A balance.
 
 Type: {asset: [Asset](#asset), amount: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), limit: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}
 
-#### Properties
+##### Properties
 
 - `asset` **[Asset](#asset)**
 - `amount` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 - `limit` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 
-### Account
+#### Account
 
 An account, with money inside!
 
 Type: {accountId: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), name: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), isPrimary: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean), balance: (null | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Balance](#balance)>), exchangeRate: [ExchangeRate](#exchangerate)}
 
-#### Properties
+##### Properties
 
 - `accountId` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 - `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
@@ -663,13 +662,13 @@ Type: {accountId: [string](https://developer.mozilla.org/docs/Web/JavaScript/Ref
 - `balance` **(null | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Balance](#balance)>)**
 - `exchangeRate` **[ExchangeRate](#exchangerate)**
 
-### Transaction
+#### Transaction
 
 A transaction, where a user sends money to another user.
 
 Type: {txId: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), time: [number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number), status: [PaymentStatus](#paymentstatus), statusDetail: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), amount: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), asset: [Asset](#asset), displayAmount: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), displayCurrency: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), fromStellar: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), toStellar: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), fromUsername: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), toUsername: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), note: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), noteErr: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), unread: [boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)}
 
-#### Properties
+##### Properties
 
 - `txId` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 - `time` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**
@@ -686,6 +685,12 @@ Type: {txId: [string](https://developer.mozilla.org/docs/Web/JavaScript/Referenc
 - `note` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 - `noteErr` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**
 - `unread` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)**
+
+#### PaymentStatus
+
+The status of a payment.
+
+Type: (`"none"` \| `"pending"` \| `"claimable"` \| `"completed"` \| `"error"` \| `"unknown"` \| `"canceled"`)
 
 ## Contributions
 
